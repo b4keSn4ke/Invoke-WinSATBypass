@@ -32,12 +32,7 @@ After running Invoke-WinSATBypass with this DLL, you should be able to dump cred
 ## Cleaning Up
 ---
 
-Since we added a new account and tampered with the registry, we need to run these commands in an elevated shell in order to bring things back to normal:
-
-```
-net user pentester /DELETE
-reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 0 /f
-```
+Since we added a new account and tampered with the registry we can run the following DLL Module : *CleanRemoteCredsDump*
 ---
 
 
